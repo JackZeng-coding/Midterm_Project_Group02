@@ -1,0 +1,8 @@
+# NetBeans build output (regenerated on every machine)
+/build/
+/dist/
+# NetBeans machine-specific settings (contain local absolute paths)
+/nbproject/private/
+# OS junk files
+.DS_Store
+Thumbs.db
