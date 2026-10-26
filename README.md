@@ -1,4 +1,4 @@
-# Midterm Project, The Digigtal University Model
+# Midterm Project, The Digital University Model
 
 ## Team Information
 **Name:** Jiahao Zeng | **NUIID:** 003155514
