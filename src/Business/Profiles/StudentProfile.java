@@ -10,12 +10,14 @@ import Business.Person.Person;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng (fixed hidden person field)
  */
 public class StudentProfile extends Profile {
 
-    Person person;
+    
 //    Transcript transcript;
     //   EmploymentHistroy employmenthistory;
+    // person is stored in the parent class Profile via super(p); do not redeclare it here
 
     public StudentProfile(Person p) {
         super(p);
@@ -29,8 +31,5 @@ public class StudentProfile extends Profile {
         return "Student";
     }
 
-    public boolean isMatch(String id) {
-        return person.getPersonId().equals(id);
-    }
 
 }
