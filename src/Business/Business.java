@@ -8,12 +8,13 @@ package Business;
 import Business.Person.PersonDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.StudentDirectory;
-
 import Business.UserAccounts.UserAccountDirectory;
+import info5100.university.example.Department.Department;
 
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng(connected university model)。
  */
 public class Business {
 
@@ -23,8 +24,7 @@ public class Business {
     EmployeeDirectory employeedirectory;
     UserAccountDirectory useraccountdirectory;
     StudentDirectory studentdirectory;
-    
-
+    private Department department;   // entry for university model
 
     public Business(String n) {
         name = n;
@@ -33,7 +33,7 @@ public class Business {
         employeedirectory = new EmployeeDirectory(this);
         useraccountdirectory = new UserAccountDirectory();
         studentdirectory = new StudentDirectory();
-
+        department = new Department("Information Systems");  // ensure it will never be "null"
 
     }
 
@@ -45,13 +45,16 @@ public class Business {
         return useraccountdirectory;
     }
 
-
     public EmployeeDirectory getEmployeeDirectory() {
         return employeedirectory;
     }
 
-    public StudentDirectory getStudentDirectory(){
+    public StudentDirectory getStudentDirectory() {
         return studentdirectory;
+    }
+
+    public Department getDepartment() {
+        return department;
     }
 
 }
