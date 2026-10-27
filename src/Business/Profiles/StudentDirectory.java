@@ -8,19 +8,27 @@ package Business.Profiles;
 import Business.Person.Person;
 
 import java.util.ArrayList;
+import info5100.university.example.Department.Department;
 
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class StudentDirectory {
 
+    private Department department;
+
+    public StudentDirectory(Department d) {
+        department = d;
+        studentlist = new ArrayList();
+    }
 
     ArrayList<StudentProfile> studentlist;
 
     public StudentDirectory() {
 
-     studentlist = new ArrayList();
+        studentlist = new ArrayList();
 
     }
 
@@ -39,7 +47,7 @@ public class StudentDirectory {
                 return sp;
             }
         }
-            return null; //not found after going through the whole list
-         }
-    
+        return null; //not found after going through the whole list
+    }
+
 }

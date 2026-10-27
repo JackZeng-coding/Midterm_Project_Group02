@@ -20,11 +20,11 @@ public class Business {
 
     String name;
     PersonDirectory persondirectory; //all people profiles regardless of the role
-
+    private Department department;   // entry for university model
     EmployeeDirectory employeedirectory;
     UserAccountDirectory useraccountdirectory;
     StudentDirectory studentdirectory;
-    private Department department;   // entry for university model
+
 
     public Business(String n) {
         name = n;
