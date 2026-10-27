@@ -21,6 +21,7 @@ import java.util.HashMap;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng (fix bug)
  */
 public class Department {
 
@@ -39,18 +40,22 @@ public class Department {
         mastercoursecatalog = new HashMap<>();
         coursecatalog = new CourseCatalog(this);
         studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
+        facultydirectory = new FacultyDirectory(this);
         persondirectory = new PersonDirectory();
         degree = new Degree("MSIS");
-        
+
     }
-    public void addCoreCourse(Course c){
+
+    public void addCoreCourse(Course c) {
         degree.addCoreCourse(c);
-        
+
     }
-public void addElectiveCourse(Course c){
+
+    public void addElectiveCourse(Course c) {
         degree.addElectiveCourse(c);
-        
+
     }
+
     public PersonDirectory getPersonDirectory() {
 
         return persondirectory;
@@ -58,7 +63,13 @@ public void addElectiveCourse(Course c){
     }
 
     public StudentDirectory getStudentDirectory() {
-    return studentdirectory;
+
+        return studentdirectory;
+    }
+
+    public FacultyDirectory getFacultyDirectory() {
+        
+        return facultydirectory;
     }
 
     public CourseSchedule newCourseSchedule(String semester) {
