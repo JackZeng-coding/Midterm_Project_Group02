@@ -25,15 +25,14 @@ public class Business {
     UserAccountDirectory useraccountdirectory;
     StudentDirectory studentdirectory;
 
-
     public Business(String n) {
         name = n;
 
         persondirectory = new PersonDirectory();
         employeedirectory = new EmployeeDirectory(this);
         useraccountdirectory = new UserAccountDirectory();
-        studentdirectory = new StudentDirectory();
         department = new Department("Information Systems");  // ensure it will never be "null"
+        studentdirectory = new StudentDirectory(department);
 
     }
 
