@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class PersonDirectory {
     
@@ -21,9 +22,9 @@ public class PersonDirectory {
 
     }
 
-    public Person newPerson(String id) {
+    public Person newPerson(String firstName, String lastName, String email) {
 
-        Person p = new Person(id);
+        Person p = new Person(firstName, lastName, email);
         personlist.add(p);
         return p;
     }
