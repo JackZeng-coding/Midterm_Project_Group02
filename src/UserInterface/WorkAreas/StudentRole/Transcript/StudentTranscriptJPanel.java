@@ -50,6 +50,9 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblTranscript.getModel();
         model.setRowCount(0); // Clear table
         
+        float totalQualityPoints = 0f;
+        int totalCredits = 0;
+        
         for (SeatAssignment sa : courses) {
             // check if SeatAssignment or Course is missing and skip
             if (sa == null || sa.getAssociatedCourse() == null) {
@@ -60,15 +63,42 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
             int credits = sa.getAssociatedCourse().getCredits();
             float grade = sa.getGrade();
             
-            Object[] row = new Object[3];
+            String letter = (grade <= 0f) ? "IP" : toLetterGrade(grade);
+            
+            Object[] row = new Object[4];
         
             row[0] = courseNumber;
             row[1] = courseName;
             row[2] = credits;
-            row[3] = grade;
+            row[3] = letter; // changed to letter grade instead of numeric
             model.addRow(row);
+            
+            if (grade > 0f) {
+                totalQualityPoints += grade * credits;
+                totalCredits += credits;
+            }
+        }
+        if (totalCredits > 0) {
+            float gpa = totalQualityPoints / totalCredits;
+            lblGpa.setText(String.format("GPA: %.2f (%d graded credits)", gpa, totalCredits));
+        } else {
+            lblGpa.setText("GPA: - (no graded courses yet)");
         }
     }
+    private String toLetterGrade(float g) {
+        // Maps 0.0-4.0 GPA value to letter grade (subject to change if necessary).
+        if (g >= 3.8f) return "A";
+        if (g >= 3.5f) return "A-";
+        if (g >= 3.15f) return "B+";
+        if (g >= 2.85f) return "B";
+        if (g >= 2.5f)  return "B-";
+        if (g >= 2.15f) return "C+";
+        if (g >= 1.85f) return "C";
+        if (g >= 1.5f)  return "C-";
+        if (g >= 1.0f)  return "D";
+        return "F";
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,22 +112,23 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTranscript = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
+        lblGpa = new javax.swing.JLabel();
 
         setLayout(null);
 
         tblTranscript.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Course Number", "Course Name", "Grade"
+                "Course Number", "Course Name", "Credits", "Grade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -117,6 +148,8 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
         });
         add(btnBack);
         btnBack.setBounds(60, 380, 74, 23);
+        add(lblGpa);
+        lblGpa.setBounds(597, 350, 160, 16);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -129,6 +162,7 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblGpa;
     private javax.swing.JTable tblTranscript;
     // End of variables declaration//GEN-END:variables
 }
