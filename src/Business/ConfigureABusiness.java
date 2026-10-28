@@ -60,16 +60,33 @@ class ConfigureABusiness {
 // ===== ADMIN SECTION (Jiahao Zeng): university setup and baseline records =====
         Department department = business.getDepartment();
 
-        // 1. Course Catalog: course name first, then course 
+        // 1. Course catalog: newCourse(name, number, credits) - the name comes first
         Course info5100 = department.newCourse("Application Engineering and Development", "INFO 5100", 4);
+        Course damg6210 = department.newCourse("Data Management and Database Design", "DAMG 6210", 4);
+        Course info6150 = department.newCourse("Web Design and User Experience", "INFO 6150", 4);
+        Course info6205 = department.newCourse("Program Structure and Algorithms", "INFO 6205", 4);
 
         // 2. Degree requirements: core courses (used by the Student graduation audit)
         department.addCoreCourse(info5100);
+        department.addCoreCourse(damg6210);
+        department.addElectiveCourse(info6150);
+        department.addElectiveCourse(info6205);
 
         // 3. Semester schedule: offer the course and create its seats
         CourseSchedule spring2026 = department.newCourseSchedule("Spring2026");
         CourseOffer info5100Spring = spring2026.newCourseOffer("INFO 5100"); // must match the number in step 1 exactly, otherwise will show null
         info5100Spring.generatSeats(10);                                     // "generat" is how the original model spells this method, if "generate", will build fail
+        CourseOffer damg6210Spring = spring2026.newCourseOffer("DAMG 6210");
+        damg6210Spring.generatSeats(10);
+        
+        CourseSchedule fall2026 = department.newCourseSchedule("Fall2026");
+        CourseOffer damg6210Fall = fall2026.newCourseOffer("DAMG 6210");
+        damg6210Fall.generatSeats(10);
+        CourseOffer info6150Fall = fall2026.newCourseOffer("INFO 6150");
+        info6150Fall.generatSeats(10);
+        CourseOffer info6205Fall = fall2026.newCourseOffer("INFO 6205");
+        info6205Fall.generatSeats(10);
+        
 
         // 4. Student's semester load -> take a seat -> record the grade
         info5100.university.example.Persona.StudentProfile adamRecord = studentprofile0.getUniversityRecord();
