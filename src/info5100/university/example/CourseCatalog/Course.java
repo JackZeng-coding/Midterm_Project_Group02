@@ -8,6 +8,7 @@ package info5100.university.example.CourseCatalog;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class Course {
 
@@ -21,6 +22,10 @@ public class Course {
         number = numb;
         credits = ch;
 
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getCOurseNumber() {
