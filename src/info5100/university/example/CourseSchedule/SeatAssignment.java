@@ -37,9 +37,10 @@ public class SeatAssignment {
     }
 
     public void setGrade(float grade) {
-        if (grade < 0.0f || grade > 4.0f) {
-            return
+        if (grade < 0.0f || grade > 4.0f) { // GPA should range from 0.0 ~ 4.0
+            return;                         // Return result to user interface
         }
+            
         this.grade = grade;
     }
 
