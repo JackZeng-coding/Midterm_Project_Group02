@@ -16,10 +16,12 @@ import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
@@ -28,11 +30,9 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     /**
      * Creates new form PricingMainFrame
      */
-
     public ProfileWorkAreaMainFrame() {
         initComponents();
         business = ConfigureABusiness.initialize();
-        
 
     }
 
@@ -132,8 +132,16 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         //      WorkAreaJPanel ura = new WorkAreaJPanel(workareajpanl);
 
-        String un = UserNameTextField.getText();
-        String pw = PasswordTextField.getText();
+        String un = UserNameTextField.getText().trim();     // trim() removes leading/trailing spaces, so "   " counts as empty
+        String pw = PasswordTextField.getText();            // the password is NOT trimmed: spaces can be part of a password
+
+        // Validation: both fields are required
+        if (un.isEmpty() || pw.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter both username and password.",
+                    "Login", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         UserAccountDirectory uad = business.getUserAccountDirectory();
         UserAccount useraccount = uad.AuthenticateUser(un, pw);
@@ -146,7 +154,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         String r = useraccount.getRole();
         Profile profile = useraccount.getAssociatedPersonProfile();
 
-
         if (profile instanceof EmployeeProfile) {
 
             adminworkarea = new AdminRoleWorkAreaJPanel(business, CardSequencePanel);
@@ -155,7 +162,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
-        
+
         if (profile instanceof StudentProfile) {
 
             StudentProfile spp = (StudentProfile) profile;
@@ -166,14 +173,14 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         }
 
- /*      if (profile instanceof FacultyProfile) {
+        /*      if (profile instanceof FacultyProfile) {
             facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
-*/
+         */
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
