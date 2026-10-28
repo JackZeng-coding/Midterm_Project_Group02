@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 /**
  *
  * @author kal
+ * @author Gavin Wen
  */
 public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 

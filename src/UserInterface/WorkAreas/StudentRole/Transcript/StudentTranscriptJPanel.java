@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rando
+ * @author Gavin Wen
  */
 public class StudentTranscriptJPanel extends javax.swing.JPanel {
     
@@ -55,14 +55,17 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
             if (sa == null || sa.getAssociatedCourse() == null) {
                 continue;
             }
+            String courseNumber = sa.getAssociatedCourse().getCOurseNumber();
+            String courseName = sa.getAssociatedCourse().getName();
+            int credits = sa.getAssociatedCourse().getCredits();
+            float grade = sa.getGrade();
+            
             Object[] row = new Object[3];
         
-            row[0] = sa.getAssociatedCourse().getCOurseNumber();
-            
-            row[1] = "Course Name"; // Need seat assignment get Name to be implemented
-            
-            row[2] = "Grade"; // need get grade to be implemented
-            
+            row[0] = courseNumber;
+            row[1] = courseName;
+            row[2] = credits;
+            row[3] = grade;
             model.addRow(row);
         }
     }
