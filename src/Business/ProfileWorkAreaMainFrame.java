@@ -146,6 +146,11 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         UserAccountDirectory uad = business.getUserAccountDirectory();
         UserAccount useraccount = uad.AuthenticateUser(un, pw);
         if (useraccount == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid username or password.",
+                    "Login failed", JOptionPane.ERROR_MESSAGE);
+            PasswordTextField.setText("");   // clear the password so the user can retry
+
             return;
         }
         StudentWorkAreaJPanel studentworkareajpanel;
