@@ -31,6 +31,7 @@ public class CourseOffer {
     }
 
     public FacultyProfile getFacultyProfile() {
+        if (facultyassignment == null) return null; // Prevents crashing if no faculty assigned
         return facultyassignment.getFacultyProfile();
     }
 

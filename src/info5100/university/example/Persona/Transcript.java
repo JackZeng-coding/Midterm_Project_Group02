@@ -13,6 +13,7 @@ import java.util.HashMap;
 /**
  *
  * @author kal bugrara
+ * @author Gavin Wen
  */
 public class Transcript {
 
@@ -89,6 +90,15 @@ public class Transcript {
 
         return temp2;
 
+    }
+    // Find which semester's CourseLoad contains this SeatAssignment
+    public String getSemesterFor(SeatAssignment sa) {
+        for (CourseLoad cl : courseloadlist.values()) {
+            if (cl.getSeatAssignments().contains(sa)) {
+                return cl.getSemester();
+            }
+        }
+        return null;
     }
 
 }

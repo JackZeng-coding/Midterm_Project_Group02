@@ -13,6 +13,7 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Gavin Wen
  */
 public class StudentProfile {
 
@@ -54,5 +55,8 @@ public class StudentProfile {
 
         return transcript.getCourseList();
 
+    }
+    public String getSemesterFor(SeatAssignment sa) {
+        return transcript.getSemesterFor(sa);
     }
 }

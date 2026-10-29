@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Gavin Wen
  */
 public class CourseLoad {
     String semester;
@@ -45,5 +46,10 @@ public class CourseLoad {
         public ArrayList<SeatAssignment> getSeatAssignments(){
             return seatassignments;
         }
+
+    public String getSemester() {
+        return semester;
+    }
+        
             
 }
