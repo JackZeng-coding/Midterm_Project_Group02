@@ -20,6 +20,9 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
     Business business;
     StudentProfile student;
     JPanel CardSequencePanel;
+    
+    // Parallel to the table rows: so we can get SeatAssigment for each row
+    private final ArrayList<SeatAssignment> rowAssignments = new ArrayList<>();
 
     /**
      * Creates new form ReviewTranscript
@@ -73,6 +76,8 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
             row[3] = letter; // changed to letter grade instead of numeric
             model.addRow(row);
             
+            rowAssignments.add(sa);
+            
             if (grade > 0f) {
                 totalQualityPoints += grade * credits;
                 totalCredits += credits;
@@ -113,6 +118,7 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
         tblTranscript = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         lblGpa = new javax.swing.JLabel();
+        btnNext = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -148,8 +154,20 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
         });
         add(btnBack);
         btnBack.setBounds(60, 380, 74, 23);
+
+        lblGpa.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblGpa.setText("GPA");
         add(lblGpa);
-        lblGpa.setBounds(597, 350, 160, 16);
+        lblGpa.setBounds(557, 350, 200, 16);
+
+        btnNext.setText("Next >>");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+        add(btnNext);
+        btnNext.setBounds(770, 380, 73, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -158,9 +176,24 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        int row = tblTranscript.getSelectedRow();
+        if(row < 0 || row >= rowAssignments.size()) {
+            javax.swing.JOptionPane.showMessageDialog(this,"Please select a course first.", "No course selected", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        SeatAssignment sa = rowAssignments.get(row);
+        StudentTranscriptDetailsJPanel details = new StudentTranscriptDetailsJPanel(business, student, sa, CardSequencePanel);
+        CardSequencePanel.add("TranscriptDetails", details);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        
+    }//GEN-LAST:event_btnNextActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnNext;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblGpa;
     private javax.swing.JTable tblTranscript;
