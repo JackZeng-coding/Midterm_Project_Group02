@@ -12,6 +12,7 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @authro Gavin Wen
  */
 public class FacultyProfile {
 
@@ -56,6 +57,10 @@ public class FacultyProfile {
             return true;
         }
         return false;
+    }
+    
+    public Person getPerson() {
+        return person;
     }
 
 }
