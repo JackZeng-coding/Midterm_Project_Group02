@@ -79,7 +79,7 @@ class ConfigureABusiness {
         info5100Spring.generatSeats(10);                                     // "generat" is how the original model spells this method, if "generate", will build fail
         CourseOffer damg6210Spring = spring2026.newCourseOffer("DAMG 6210");
         damg6210Spring.generatSeats(10);
-        
+
         CourseSchedule fall2026 = department.newCourseSchedule("Fall2026");
         CourseOffer damg6210Fall = fall2026.newCourseOffer("DAMG 6210");
         damg6210Fall.generatSeats(10);
@@ -87,7 +87,7 @@ class ConfigureABusiness {
         info6150Fall.generatSeats(10);
         CourseOffer info6205Fall = fall2026.newCourseOffer("INFO 6205");
         info6205Fall.generatSeats(10);
-        
+
         // 4. Register two more students. newStudentProfile() also creates the linked
         //    university record with the same ID (see StudentDirectory)
         StudentProfile studentprofile1 = studentdirectory.newStudentProfile(person005);   // Jim Dellon
@@ -131,7 +131,7 @@ class ConfigureABusiness {
 // ===== END STUDENT SECTION =====
 
 // ===== FACULTY SECTION (Jiahao Zeng): faculty profiles and their login accounts =====     
-    // newFacultyProfile() also creates the linked university record with the same ID (see FacultyDirectory)
+        // newFacultyProfile() also creates the linked university record with the same ID (see FacultyDirectory)
         FacultyDirectory facultydirectory = business.getFacultyDirectory();
         FacultyProfile facultyprofile0 = facultydirectory.newFacultyProfile(person002);   // Gina Montana (1001)
         FacultyProfile facultyprofile1 = facultydirectory.newFacultyProfile(person007);   // Laura Brown (1005)
@@ -139,8 +139,14 @@ class ConfigureABusiness {
         UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "gina", "****");
         UserAccount ua6 = uadirectory.newUserAccount(facultyprofile1, "laura", "****");
 
+        // Teaching assignments: always go through CourseOffer.AssignAsTeacher() so both sides stay in sync
+        info5100Spring.AssignAsTeacher(facultyprofile0.getUniversityRecord());   // Gina, graded class
+        info6150Fall.AssignAsTeacher(facultyprofile0.getUniversityRecord());     // Gina, in progress
+        info6205Fall.AssignAsTeacher(facultyprofile0.getUniversityRecord());     // Gina, in progress
+        damg6210Spring.AssignAsTeacher(facultyprofile1.getUniversityRecord());   // Laura, graded class
+        damg6210Fall.AssignAsTeacher(facultyprofile1.getUniversityRecord());     // Laura, in progress
+
 // ===== END STUDENT SECTION =====
-        
         return business;
 
     }
