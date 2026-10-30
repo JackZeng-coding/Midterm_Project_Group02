@@ -12,7 +12,8 @@ import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.EmployeeProfile;
 import Business.Profiles.StudentDirectory;
 import Business.Profiles.StudentProfile;
-
+import Business.Profiles.FacultyDirectory;
+import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
 import info5100.university.example.CourseCatalog.Course;
@@ -129,7 +130,15 @@ class ConfigureABusiness {
 //    -- Gavin, You can work here
 // ===== END STUDENT SECTION =====
 
-// ===== FACULTY SECTION (Jiahao Zeng): teachers will be added in the Faculty PR =====      
+// ===== FACULTY SECTION (Jiahao Zeng): faculty profiles and their login accounts =====     
+    // newFacultyProfile() also creates the linked university record with the same ID (see FacultyDirectory)
+        FacultyDirectory facultydirectory = business.getFacultyDirectory();
+        FacultyProfile facultyprofile0 = facultydirectory.newFacultyProfile(person002);   // Gina Montana (1001)
+        FacultyProfile facultyprofile1 = facultydirectory.newFacultyProfile(person007);   // Laura Brown (1005)
+
+        UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "gina", "****");
+        UserAccount ua6 = uadirectory.newUserAccount(facultyprofile1, "laura", "****");
+
 // ===== END STUDENT SECTION =====
         
         return business;

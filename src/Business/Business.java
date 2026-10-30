@@ -8,6 +8,7 @@ package Business;
 import Business.Person.PersonDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.StudentDirectory;
+import Business.Profiles.FacultyDirectory;
 import Business.UserAccounts.UserAccountDirectory;
 import info5100.university.example.Department.Department;
 
@@ -24,6 +25,7 @@ public class Business {
     EmployeeDirectory employeedirectory;
     UserAccountDirectory useraccountdirectory;
     StudentDirectory studentdirectory;
+    FacultyDirectory facultydirectory;
 
     public Business(String n) {
         name = n;
@@ -33,6 +35,7 @@ public class Business {
         useraccountdirectory = new UserAccountDirectory();
         department = new Department("Information Systems");  // ensure it will never be "null"
         studentdirectory = new StudentDirectory(department);
+        facultydirectory = new FacultyDirectory(department);
 
     }
 
@@ -50,6 +53,10 @@ public class Business {
 
     public StudentDirectory getStudentDirectory() {
         return studentdirectory;
+    }
+
+    public FacultyDirectory getFacultyDirectory() {
+        return facultydirectory;
     }
 
     public Department getDepartment() {
