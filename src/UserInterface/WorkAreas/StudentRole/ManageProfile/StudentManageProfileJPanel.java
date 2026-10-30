@@ -87,19 +87,19 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("NUID:");
         add(jLabel1);
-        jLabel1.setBounds(150, 50, 31, 16);
+        jLabel1.setBounds(180, 60, 31, 16);
 
         jLabel2.setText("Role:");
         add(jLabel2);
-        jLabel2.setBounds(150, 100, 26, 16);
+        jLabel2.setBounds(180, 110, 40, 16);
 
         jLabel4.setText("First Name:");
         add(jLabel4);
-        jLabel4.setBounds(150, 150, 70, 16);
+        jLabel4.setBounds(150, 160, 70, 16);
 
         jLabel5.setText("Last Name:");
         add(jLabel5);
-        jLabel5.setBounds(150, 200, 70, 16);
+        jLabel5.setBounds(150, 210, 70, 16);
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -125,11 +125,11 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
         txtID.setEditable(false);
         add(txtID);
-        txtID.setBounds(190, 50, 270, 30);
+        txtID.setBounds(220, 50, 270, 30);
 
         txtRole.setEditable(false);
         add(txtRole);
-        txtRole.setBounds(180, 100, 270, 30);
+        txtRole.setBounds(220, 100, 270, 30);
 
         txtFirstName.setEditable(false);
         add(txtFirstName);
@@ -137,11 +137,11 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Email:");
         add(jLabel6);
-        jLabel6.setBounds(150, 250, 70, 16);
+        jLabel6.setBounds(180, 260, 70, 16);
 
         txtEmail.setEditable(false);
         add(txtEmail);
-        txtEmail.setBounds(190, 250, 270, 30);
+        txtEmail.setBounds(220, 250, 270, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
