@@ -13,6 +13,7 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Gavin Wen
  */
 public class Degree {
 
@@ -101,5 +102,19 @@ public class Degree {
         return false;
 
     }
+    // Added read-only accessors to get data
+
+    public String getTitle() {
+        return title;
+    }
+
+    public ArrayList<Course> getCorelist() {
+        return corelist;
+    }
+
+    public ArrayList<Course> getElectives() {
+        return electives;
+    }
+    
 
 }
