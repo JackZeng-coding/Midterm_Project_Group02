@@ -13,6 +13,7 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class CourseOffer {
 
@@ -27,7 +28,10 @@ public class CourseOffer {
      
     public void AssignAsTeacher(FacultyProfile fp) {
 
-        facultyassignment = new FacultyAssignment(fp, this);
+        if (fp == null) {
+        return;   // nothing to assign
+    }
+        facultyassignment = fp.AssignAsTeacher(this);
     }
 
     public FacultyProfile getFacultyProfile() {
