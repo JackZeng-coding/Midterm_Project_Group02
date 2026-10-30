@@ -10,6 +10,7 @@ import info5100.university.example.CourseSchedule.CourseOffer;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng(add getter)
  */
 public class FacultyAssignment {
     double tracerating;
@@ -28,6 +29,12 @@ public class FacultyAssignment {
            
            tracerating = r;
        }
+
+    public CourseOffer getCourseoffer() {
+        return courseoffer;
+    }
+       
+       
     public FacultyProfile getFacultyProfile(){
         return facultyprofile;
     }
