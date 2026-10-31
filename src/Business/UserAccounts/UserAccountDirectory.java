@@ -63,6 +63,10 @@ public class UserAccountDirectory {
         return false;
     }
 
+    public void removeUserAccount(UserAccount ua) {
+        useraccountlist.remove(ua);
+    }
+
     public ArrayList<UserAccount> getUserAccountList() {
         return useraccountlist;
     }
