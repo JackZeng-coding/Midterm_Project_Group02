@@ -12,20 +12,21 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class UserAccountDirectory {
-    
-      ArrayList<UserAccount> useraccountlist ;
-    
-      public UserAccountDirectory (){
-          
-       useraccountlist = new ArrayList();
+
+    ArrayList<UserAccount> useraccountlist;
+
+    public UserAccountDirectory() {
+
+        useraccountlist = new ArrayList();
 
     }
 
     public UserAccount newUserAccount(Profile p, String un, String pw) {
 
-        UserAccount ua = new UserAccount (p,  un,  pw);
+        UserAccount ua = new UserAccount(p, un, pw);
         useraccountlist.add(ua);
         return ua;
     }
@@ -38,9 +39,10 @@ public class UserAccountDirectory {
                 return ua;
             }
         }
-            return null; //not found after going through the whole list
-         }
-     public UserAccount AuthenticateUser(String un, String pw) {
+        return null; //not found after going through the whole list
+    }
+
+    public UserAccount AuthenticateUser(String un, String pw) {
 
         for (UserAccount ua : useraccountlist) {
 
@@ -48,10 +50,20 @@ public class UserAccountDirectory {
                 return ua;
             }
         }
-            return null; //not found after going through the whole list
-         }   
-     public ArrayList<UserAccount> getUserAccountList()
-     {
-         return useraccountlist;
-     }
+        return null; //not found after going through the whole list
+    }
+
+    // Usernames must be unique (case-insensitive): "Gina" and "gina" count as the same name
+    public boolean isUsernameTaken(String un) {
+        for (UserAccount ua : useraccountlist) {
+            if (ua.getUserLoginName().equalsIgnoreCase(un)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<UserAccount> getUserAccountList() {
+        return useraccountlist;
+    }
 }
