@@ -76,11 +76,12 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 550, -1));
+        add(jLabel2);
+        jLabel2.setBounds(30, 20, 550, 28);
 
         tblAccounts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,23 +101,29 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblAccounts);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 530, 150));
+        add(jScrollPane1);
+        jScrollPane1.setBounds(40, 60, 530, 150);
 
         jLabel1.setText("New Password:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 100, -1));
-        add(pwdNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 160, -1));
+        add(jLabel1);
+        jLabel1.setBounds(50, 230, 100, 17);
+        add(pwdNewPassword);
+        pwdNewPassword.setBounds(150, 230, 160, 23);
 
         btnDelete.setText("Delete Account");
         btnDelete.addActionListener(this::btnDeleteActionPerformed);
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 140, -1));
+        add(btnDelete);
+        btnDelete.setBounds(50, 330, 140, 23);
 
         btnChangePassword.setText("Change Password");
         btnChangePassword.addActionListener(this::btnChangePasswordActionPerformed);
-        add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 140, -1));
+        add(btnChangePassword);
+        btnChangePassword.setBounds(50, 300, 140, 23);
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(this::btnBackActionPerformed);
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
+        add(btnBack);
+        btnBack.setBounds(50, 360, 80, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
@@ -139,12 +146,12 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-                UserAccount ua = getSelectedAccount();
+        UserAccount ua = getSelectedAccount();
         if (ua == null) {
             warn("Please select an account first.");
             return;
         }
-        
+
         if (ua == currentAccount) {
             warn("You cannot delete the account you are logged in with.");
             return;
@@ -157,13 +164,13 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
             return;
         }
         business.getUserAccountDirectory().removeUserAccount(ua);
-        populateTable();   
+        populateTable();
         JOptionPane.showMessageDialog(this, "Account deleted.", "Done", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-                CardSequencePanel.remove(this);
+        CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
