@@ -12,6 +12,7 @@ import Business.Profiles.Profile;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class UserAccount {
     
@@ -31,6 +32,10 @@ public class UserAccount {
     }
     public String getUserLoginName(){
         return username;
+    }
+    
+        public void setPassword(String pw) {
+        password = pw;
     }
 
         public boolean isMatch(String id){
