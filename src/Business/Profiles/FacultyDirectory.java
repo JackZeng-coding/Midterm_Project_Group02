@@ -52,4 +52,21 @@ public class FacultyDirectory {
     public ArrayList<FacultyProfile> getFacultyList() {
         return facultylist;
     }
+    
+    // added by Jiahao Zeng: delete a faculty member on BOTH sides (newFacultyProfile in reverse).
+    // The caller must check first that the faculty member has no teaching assignments.
+    public void removeFaculty(FacultyProfile fp) {
+        if (fp == null) {
+            return;
+        }
+        String id = fp.getPerson().getPersonId();
+        department.getFacultyDirectory().removeFaculty(fp.getUniversityRecord());
+        info5100.university.example.Persona.Person uniPerson
+                = department.getPersonDirectory().findPerson(id);
+        if (uniPerson != null) {
+            department.getPersonDirectory().removePerson(uniPerson);
+        }
+        facultylist.remove(fp);
+    }
+    
 }

@@ -53,4 +53,29 @@ public class StudentDirectory {
         return null; //not found after going through the whole list
     }
 
+    // added by Jiahao Zeng: Admin "Manage Students" needs the full list
+    public ArrayList<StudentProfile> getStudentList() {
+        return studentlist;
+    }
+
+    // added by Jiahao Zeng: delete a student on BOTH sides (newStudentProfile in reverse).
+    // The caller must check first that the student has no course records.
+    public void removeStudent(StudentProfile sp) {
+        if (sp == null) {
+            return;                                    // nothing to delete
+        }
+        // 1. the shared key: this student's ID
+        String id = sp.getPerson().getPersonId();
+        // 2. university side: remove the student record
+        department.getStudentDirectory().removeStudent(sp.getUniversityRecord());
+        // 3. university side: find the Person with the same ID, then remove it
+        info5100.university.example.Persona.Person uniPerson
+                = department.getPersonDirectory().findPerson(id);
+        if (uniPerson != null) {
+            department.getPersonDirectory().removePerson(uniPerson);
+        }
+        // 4. access-control side
+        studentlist.remove(sp);
+    }
+    
 }
