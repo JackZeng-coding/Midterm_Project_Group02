@@ -6,7 +6,7 @@ package UserInterface.WorkAreas.StudentRole.ManageProfile;
 
 import Business.Business;
 import Business.Person.Person;
-import Business.Profiles.StudentProfile;
+import Business.Profiles.Profile;
 import javax.swing.JPanel;
 
 /**
@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class StudentManageProfileJPanel extends javax.swing.JPanel {
     
     Business business;
-    StudentProfile student;
+    Profile student;
     JPanel CardSequencePanel;
     
     private boolean editing = false;
@@ -24,7 +24,7 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
     /**
      * Creates new form StudentManageProfile
      */
-    public StudentManageProfileJPanel(Business business, StudentProfile student, JPanel CardSequencePanel) {
+    public StudentManageProfileJPanel(Business business, Profile student, JPanel CardSequencePanel) {
         this.business = business;
         this.student = student;
         this.CardSequencePanel = CardSequencePanel;
