@@ -140,6 +140,9 @@ public class Department {
         CourseOffer co = cs.getCourseOfferByNumber(cn);
         if (co == null) return false;
         return co.dropSeatFor(cl, cn);
+    // Added read-only accessor to get degree
+    public Degree getDegree() {
+        return degree;
     }
     
 }

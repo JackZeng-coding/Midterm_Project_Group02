@@ -14,23 +14,47 @@ import java.util.ArrayList;
  *
  * @author kal bugrara
  * @author Gavin Wen
+ * @author Jiahao Zeng
  */
 public class CourseOffer {
 
     Course course;
+    String semester;   // fixed when the offer is created (getter only, like a person ID)
     ArrayList<Seat> seatlist;
     FacultyAssignment facultyassignment;
 
-    public CourseOffer(Course c) {
+    public CourseOffer(Course c, String semester) {
         course = c;
+        this.semester = semester;
         seatlist = new ArrayList();
     }
      
     public void AssignAsTeacher(FacultyProfile fp) {
 
-        facultyassignment = new FacultyAssignment(fp, this);
+        if (fp == null) {
+        return;   // nothing to assign
+    }
+        facultyassignment = fp.AssignAsTeacher(this);
     }
 
+     public String getSemester() {
+        return semester;
+    }
+
+    public int getCapacity() {
+        return seatlist.size();   // total number of seats
+    }
+
+    public int getEnrolledCount() {
+        int count = 0;
+        for (Seat s : seatlist) {
+            if (s.isOccupied()) {   // is someone sitting in this seat?
+                count++;            // yes → add 1 to the counter
+            }
+        }
+        return count;
+    }
+    
     public FacultyProfile getFacultyProfile() {
         if (facultyassignment == null) return null; // Prevents crashing if no faculty assigned
         return facultyassignment.getFacultyProfile();

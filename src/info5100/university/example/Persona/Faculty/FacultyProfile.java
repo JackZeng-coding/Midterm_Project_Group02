@@ -13,42 +13,53 @@ import java.util.ArrayList;
  *
  * @author kal bugrara
  * @authro Gavin Wen
+ * @author Jiahao Zeng
  */
 public class FacultyProfile {
 
     Person person;
-    ArrayList <FacultyAssignment> facultyassignments; 
-    
+    ArrayList<FacultyAssignment> facultyassignments;
+
     public FacultyProfile(Person p) {
 
         person = p;
         facultyassignments = new ArrayList();
     }
-    public  double getProfAverageOverallRating(){
-        
+
+    // Teacher → courses (the direction the Faculty "Manage Courses" screen needs)
+    public ArrayList<CourseOffer> getCourseOffers() {
+        ArrayList<CourseOffer> offers = new ArrayList<>();
+        for (FacultyAssignment fa : facultyassignments) {
+            // add this assignment's course offer to the list
+        }
+        return offers;
+    }
+
+    public double getProfAverageOverallRating() {
+
         double sum = 0.0;
         //for each facultyassignment extract class rating
         //add them up and divide by the number of teaching assignmnet;
-        for(FacultyAssignment fa: facultyassignments){
-            
+        for (FacultyAssignment fa : facultyassignments) {
+
             sum = sum + fa.getRating();
-            
+
         }
         //divide by the total number of faculty assignments
-        
-        return sum/(facultyassignments.size()*1.0); //this ensure we have double/double
-        
+
+        return sum / (facultyassignments.size() * 1.0); //this ensure we have double/double
+
     }
 
-    public FacultyAssignment AssignAsTeacher(CourseOffer co){
-        
+    public FacultyAssignment AssignAsTeacher(CourseOffer co) {
+
         FacultyAssignment fa = new FacultyAssignment(this, co);
         facultyassignments.add(fa);
-        
+
         return fa;
     }
-    
-    public FacultyProfile getCourseOffer(String courseid){
+
+    public FacultyProfile getCourseOffer(String courseid) {
         return null; //complete it later
     }
 
@@ -58,7 +69,7 @@ public class FacultyProfile {
         }
         return false;
     }
-    
+
     public Person getPerson() {
         return person;
     }

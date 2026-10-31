@@ -33,7 +33,7 @@ public class CourseSchedule {
         Course c = coursecatalog.getCourseByNumber(n);
         if(c==null) return null;
         CourseOffer co;
-        co = new CourseOffer(c);
+        co = new CourseOffer(c, semester);   // the offer remembers its semester
         schedule.add(co);
         return co;
     }
