@@ -30,7 +30,7 @@ public class FacultyAssignment {
            tracerating = r;
        }
 
-    public CourseOffer getCourseoffer() {
+    public CourseOffer getCourseOffer() {
         return courseoffer;
     }
        
