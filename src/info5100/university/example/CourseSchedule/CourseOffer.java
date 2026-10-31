@@ -21,6 +21,8 @@ public class CourseOffer {
     String semester;   // fixed when the offer is created (getter only, like a person ID)
     ArrayList<Seat> seatlist;
     FacultyAssignment facultyassignment;
+    String meetingTime = "TBA";   // course details the teacher can update
+    String description = "";
 
     public CourseOffer(Course c, String semester) {
         course = c;
@@ -52,6 +54,22 @@ public class CourseOffer {
             }
         }
         return count;
+    }
+    
+    public String getMeetingTime() {
+        return meetingTime;
+    }
+
+    public void setMeetingTime(String meetingTime) {
+        this.meetingTime = meetingTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     public FacultyProfile getFacultyProfile() {
