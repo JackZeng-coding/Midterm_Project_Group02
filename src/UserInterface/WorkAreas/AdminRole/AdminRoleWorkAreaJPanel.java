@@ -15,6 +15,7 @@ import Business.UserAccounts.UserAccount;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageAccountsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManageRecordsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.RegisterPersonsJPanel;
+import UserInterface.WorkAreas.StudentRole.ManageProfile.StudentManageProfileJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -184,6 +185,9 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
+        StudentManageProfileJPanel aos = new StudentManageProfileJPanel(business, account.getAssociatedPersonProfile(), CardSequencePanel);
+        CardSequencePanel.add("My Profile", aos);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
