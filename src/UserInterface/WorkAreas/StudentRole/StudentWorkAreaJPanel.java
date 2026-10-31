@@ -55,9 +55,8 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton4 = new javax.swing.JButton();
-        btnGraduationAudit = new javax.swing.JButton();
         btnManageProfile = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btnGraduationAudit = new javax.swing.JButton();
         btnRegistration = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnTranscript = new javax.swing.JButton();
@@ -167,8 +166,8 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnRegistration, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGraduationAudit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnManageProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGraduationAudit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addComponent(btnTranscript, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(122, Short.MAX_VALUE))
@@ -187,20 +186,18 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 }//GEN-LAST:event_btnManageProfileActionPerformed
 
-    private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        // TODO add your handling code here:                                        
         StudentGraduationAuditJPanel auditPanel = new StudentGraduationAuditJPanel(business, student, CardSequencePanel);
         CardSequencePanel.add("GraduationAudit", auditPanel);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-    }//GEN-LAST:event_btnGraduationAuditActionPerformed
+    }                                                  
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
         // TODO add your handling code here:
         StudentRegistrationJPanel regPanel = new StudentRegistrationJPanel(business, student, CardSequencePanel);
         CardSequencePanel.add("Registration", regPanel);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        CardSequencePanel.removeAll();
 }//GEN-LAST:event_btnRegistrationActionPerformed
 
     private void btnTranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranscriptActionPerformed
@@ -220,7 +217,6 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnManageProfile;
     private javax.swing.JButton btnRegistration;
     private javax.swing.JButton btnTranscript;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
