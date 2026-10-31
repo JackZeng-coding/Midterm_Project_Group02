@@ -16,12 +16,14 @@ import info5100.university.example.Persona.Faculty.FacultyDirectory;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
 import info5100.university.example.Persona.StudentProfile;
+import info5100.university.example.CourseSchedule.SeatAssignment;
 import java.util.HashMap;
 
 /**
  *
  * @author kal bugrara
  * @author Jiahao Zeng (fix bug)
+ * @author Gavin Wen
  */
 public class Department {
 
@@ -34,6 +36,8 @@ public class Department {
     Degree degree;
 
     HashMap<String, CourseSchedule> mastercoursecatalog;
+    
+    private String currentSemester = "Fall2026";  // suggested semester
 
     public Department(String n) {
         name = n;
@@ -105,17 +109,37 @@ public class Department {
 
     }
 
-    public void RegisterForAClass(String studentid, String cn, String semester) {
+    public boolean RegisterForAClass(String studentid, String cn, String semester) {
 
         StudentProfile sp = studentdirectory.findStudent(studentid);
-
-        CourseLoad cl = sp.getCurrentCourseLoad();
-
+        if (sp == null) return false;
+        CourseLoad cl = sp.getCourseLoadBySemester(semester);
+        if (cl == null) cl = sp.newCourseLoad(semester);
         CourseSchedule cs = mastercoursecatalog.get(semester);
-
+        if (cs == null) return false;
         CourseOffer co = cs.getCourseOfferByNumber(cn);
+        if (co == null) return false;
+        for (SeatAssignment sa: cl.getSeatAssignments()) {
+            if (sa.getAssociatedCourse().getCOurseNumber().equals(cn)) return false;
+        }
 
-        co.assignEmptySeat(cl);
+        return co.assignEmptySeat(cl) != null; 
 
     }
+
+    public String getCurrentSemester() {
+        return currentSemester;
+    }
+    public boolean DropAClass(String studentid, String cn, String semester) {
+        StudentProfile sp = studentdirectory.findStudent(studentid);
+        if(sp == null) return false;
+        CourseLoad cl = sp.getCourseLoadBySemester(semester);
+        if (cl == null) return false;
+        CourseSchedule cs = mastercoursecatalog.get(semester);
+        if (cs == null) return false;
+        CourseOffer co = cs.getCourseOfferByNumber(cn);
+        if (co == null) return false;
+        return co.dropSeatFor(cl, cn);
+    }
+    
 }

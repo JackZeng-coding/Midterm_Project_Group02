@@ -50,6 +50,12 @@ public class CourseLoad {
     public String getSemester() {
         return semester;
     }
+    public boolean removeSeatAssignment(SeatAssignment sa) {
+        if (sa == null) return false;
+        boolean removed = seatassignments.remove(sa);
+        if (removed && sa.getSeat() != null) sa.getSeat().free();
+        return removed;
+    }
         
             
 }

@@ -8,6 +8,7 @@ package info5100.university.example.CourseSchedule;
 /**
  *
  * @author kal bugrara
+ * @author Gavin Wen
  */
 public class Seat {
     
@@ -20,6 +21,10 @@ public class Seat {
         number = n;
         occupied = false;
         
+    }
+    public void free() {
+        this.occupied = false;
+        this.seatassignment = null;
     }
     
     public Boolean isOccupied(){
