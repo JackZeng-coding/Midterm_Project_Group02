@@ -8,6 +8,7 @@ package info5100.university.example.CourseSchedule;
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.Persona.Faculty.FacultyAssignment;
 import info5100.university.example.Persona.Faculty.FacultyProfile;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -24,11 +25,13 @@ public class CourseOffer {
     FacultyAssignment facultyassignment;
     String meetingTime = "TBA";   // course details the teacher can update
     String description = "";
+    ArrayList<CourseAssignment> assignments;
 
     public CourseOffer(Course c, String semester) {
         course = c;
         this.semester = semester;
         seatlist = new ArrayList();
+        assignments = new ArrayList();
     }
      
     public void AssignAsTeacher(FacultyProfile fp) {
@@ -80,6 +83,17 @@ public class CourseOffer {
 
     public String getCourseNumber() {
         return course.getCOurseNumber();
+    }
+
+    public CourseAssignment newAssignment(String title, String description, LocalDate dueDate, int maxPoints) {
+        CourseAssignment a = new CourseAssignment(this, title, description, dueDate, maxPoints);
+        assignments.add(a);
+        return a;
+    }
+
+    // return a copy so callers can only add assignments through newAssignment()
+    public ArrayList<CourseAssignment> getAssignments() {
+        return new ArrayList<>(assignments);
     }
 
     public void generatSeats(int n) {
