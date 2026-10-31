@@ -184,7 +184,7 @@ public class StudentRegistrationJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack);
-        btnBack.setBounds(60, 440, 74, 23);
+        btnBack.setBounds(60, 440, 90, 23);
 
         btnDrop.setText("<< Drop");
         btnDrop.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +205,7 @@ public class StudentRegistrationJPanel extends javax.swing.JPanel {
 
         txtStatus.setText("Select an offer to register.");
         add(txtStatus);
-        txtStatus.setBounds(60, 380, 290, 16);
+        txtStatus.setBounds(60, 380, 770, 16);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -256,7 +256,7 @@ public class StudentRegistrationJPanel extends javax.swing.JPanel {
         
         boolean ok = business.getDepartment().DropAClass(p.getPersonId(), courseNumber, semester);
         
-        txtStatus.setText(ok ? "Dropped" + courseNumber + "." : "Could not drop " + courseNumber + ".");
+        txtStatus.setText(ok ? "Dropped " + courseNumber + "." : "Could not drop " + courseNumber + ".");
         loadOffer();
         loadMyRegistration();
   
