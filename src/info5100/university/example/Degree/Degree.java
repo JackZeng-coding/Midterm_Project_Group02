@@ -13,12 +13,14 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Gavin Wen
  */
 public class Degree {
 
     String title;
     ArrayList<Course> corelist;
     ArrayList<Course> electives;
+    private int requiredCredits = 32; // NEU requirement, put here in case want to change
 
     public Degree(String name) {
         title = name;
@@ -43,15 +45,23 @@ public class Degree {
         //For each core course in the core list of the degree do the following:
         //Check if the core class at hand is in the transcrip
         //Repeat this check for the electives as well
-        ArrayList sas = sp.getCourseList(); //seatAssignments extracted from course loads
+        ArrayList<SeatAssignment> sas = sp.getCourseList(); //seatAssignments extracted from course loads
 
-        if (validateCoreClasses(sas) == false) {
+        if (!validateCoreClasses(sas)) {
             return false;
         }//core classes satisfied
 
         //Do the electives check in case some taken classes are not part of the electives
+        int electivesTaken = getTotalElectiveCoursesTaken(sas);
+        if (electivesTaken < 1) { // subject to change if want to add strict number of electives taken to pass
+            return false;
+        }
       
         //Check for the total number of credit hours that it is above 32
+        int totalCredits = getTotalCreditsTaken(sas);
+        if (totalCredits < requiredCredits) {
+            return false;
+        }
 
         else return true; //student has at least 32 credit hours per NEU requirements
 
@@ -80,6 +90,15 @@ public class Degree {
         return false;
 
     }
+    // Sum credit hours across all seat assignments for total credits taken
+    public int getTotalCreditsTaken(ArrayList<SeatAssignment> sas) {
+        int total = 0;
+        for (SeatAssignment sa : sas) {
+            total += sa.getAssociatedCourse().getCredits();
+        }
+        return total;
+        
+    }
 
     public int getTotalElectiveCoursesTaken(ArrayList<SeatAssignment> sas) {
         int electivecount = 0;
@@ -101,5 +120,23 @@ public class Degree {
         return false;
 
     }
+    // Added read-only accessors to get data
+
+    public String getTitle() {
+        return title;
+    }
+
+    public ArrayList<Course> getCorelist() {
+        return corelist;
+    }
+
+    public ArrayList<Course> getElectives() {
+        return electives;
+    }
+
+    public int getRequiredCredits() {
+        return requiredCredits;
+    }
+    
 
 }

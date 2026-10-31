@@ -22,6 +22,7 @@ import java.util.HashMap;
  *
  * @author kal bugrara
  * @author Jiahao Zeng (fix bug)
+ * @author Gavin Wen
  */
 public class Department {
 
@@ -118,4 +119,9 @@ public class Department {
         co.assignEmptySeat(cl);
 
     }
+    // Added read-only accessor to get degree
+    public Degree getDegree() {
+        return degree;
+    }
+    
 }
