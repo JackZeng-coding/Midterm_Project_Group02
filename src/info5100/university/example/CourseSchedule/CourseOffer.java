@@ -13,6 +13,7 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Gavin Wen
  * @author Jiahao Zeng
  */
 public class CourseOffer {
@@ -131,6 +132,20 @@ public class CourseOffer {
     }
     public int getCreditHours(){
         return course.getCredits();
+    }
+    // Method with for loop to look through seatlist for non occupied seats to get a int value
+    public int getAvailableSeatCount() {
+        int n = 0;
+        for (Seat s : seatlist) if (!s.isOccupied()) n++;
+        return n;
+    }
+    public boolean dropSeatFor(CourseLoad cl, String courseNumber) {
+        for (SeatAssignment sa : new ArrayList<>(cl.getSeatAssignments())) {
+            if (sa.getAssociatedCourse().getCOurseNumber().equals(courseNumber)) {
+                return cl.removeSeatAssignment(sa);
+            }
+        }
+        return false;
     }
 
 }
