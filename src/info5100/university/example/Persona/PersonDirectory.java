@@ -10,14 +10,15 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
+ * @author Jiahao Zeng
  */
 public class PersonDirectory {
-    
-      ArrayList<Person> personlist ;
-    
-      public PersonDirectory (){
-          
-       personlist = new ArrayList();
+
+    ArrayList<Person> personlist;
+
+    public PersonDirectory() {
+
+        personlist = new ArrayList();
 
     }
 
@@ -36,7 +37,11 @@ public class PersonDirectory {
                 return p;
             }
         }
-            return null; //not found after going through the whole list
-         }
+        return null; //not found after going through the whole list
+    }
     
+    // added by Jiahao Zeng
+    public void removePerson(Person p) {
+        personlist.remove(p);
+    }
 }
