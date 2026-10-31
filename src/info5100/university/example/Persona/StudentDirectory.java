@@ -11,8 +11,6 @@ import java.util.ArrayList;
 /**
  *
  * @author kal bugrara
- * @author Jiahao Zeng
- * @author
  */
 public class StudentDirectory {
 
@@ -41,11 +39,7 @@ public class StudentDirectory {
                 return sp;
             }
         }
-        return null; //not found after going through the whole list
-    }
+            return null; //not found after going through the whole list
+         }
     
-    // added by Jiahao Zeng
-    public void removeStudent(StudentProfile sp) {
-        studentlist.remove(sp);
-    }
 }

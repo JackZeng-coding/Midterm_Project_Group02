@@ -146,7 +146,7 @@ class ConfigureABusiness {
         damg6210Spring.AssignAsTeacher(facultyprofile1.getUniversityRecord());   // Laura, graded class
         damg6210Fall.AssignAsTeacher(facultyprofile1.getUniversityRecord());     // Laura, in progress
 
-// ===== END FACULTY SECTION =====
+// ===== END STUDENT SECTION =====
         return business;
 
     }

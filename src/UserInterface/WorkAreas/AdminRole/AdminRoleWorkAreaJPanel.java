@@ -13,7 +13,6 @@ package UserInterface.WorkAreas.AdminRole;
 import Business.Business;
 import Business.UserAccounts.UserAccount;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageAccountsJPanel;
-import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManageRecordsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.RegisterPersonsJPanel;
 import javax.swing.JPanel;
 
@@ -176,10 +175,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        // jButton8 = "Manage Students"
-        ManageRecordsJPanel aos = new ManageRecordsJPanel(business, "Student", CardSequencePanel);
-        CardSequencePanel.add("Manage Students", aos);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -187,10 +182,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // jButton9 = "Manage Faculty"
-        ManageRecordsJPanel aos = new ManageRecordsJPanel(business, "Faculty", CardSequencePanel);
-        CardSequencePanel.add("Manage Faculty", aos);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_jButton9ActionPerformed
 
 

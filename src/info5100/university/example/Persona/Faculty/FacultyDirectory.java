@@ -31,19 +31,18 @@ public class FacultyDirectory {
         teacherlist.add(sp);
         return sp;
     }
-
-    public FacultyProfile getTopProfessor() {
-
+    
+    public FacultyProfile getTopProfessor(){
+        
         double bestratingsofar = 0.0;
         FacultyProfile BestProfSofar = null;
-        for (FacultyProfile fp : teacherlist) {
-            if (fp.getProfAverageOverallRating() > bestratingsofar) {
-                bestratingsofar = fp.getProfAverageOverallRating();
-                BestProfSofar = fp;
-            }
-        }
+        for(FacultyProfile fp: teacherlist)
+           if(fp.getProfAverageOverallRating()>bestratingsofar){
+           bestratingsofar = fp.getProfAverageOverallRating();
+           BestProfSofar = fp;
+           }
         return BestProfSofar;
-
+        
     }
 
     public FacultyProfile findTeachingFaculty(String id) {
@@ -54,11 +53,7 @@ public class FacultyDirectory {
                 return sp;
             }
         }
-        return null; //not found after going through the whole list
-    }
-
-    // added by Jiahao Zeng
-    public void removeFaculty(FacultyProfile fp) {
-        teacherlist.remove(fp);
-    }
+            return null; //not found after going through the whole list
+         }
+    
 }

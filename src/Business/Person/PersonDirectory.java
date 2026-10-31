@@ -40,8 +40,4 @@ public class PersonDirectory {
             return null; //not found after going through the whole list
          }
     
-    // added by Jiahao Zeng: used when Admin deletes a person
-    public void removePerson(Person p) {
-        personlist.remove(p);
-    }
 }
