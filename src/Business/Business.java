@@ -19,6 +19,8 @@ import info5100.university.example.Department.Department;
  */
 public class Business {
 
+    // The semester that is currently running; earlier semesters are finished (read-only)
+    public static final String CURRENT_SEMESTER = "Fall2026";
     String name;
     PersonDirectory persondirectory; //all people profiles regardless of the role
     private Department department;   // entry for university model

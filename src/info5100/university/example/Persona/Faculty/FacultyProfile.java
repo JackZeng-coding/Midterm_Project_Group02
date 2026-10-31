@@ -30,7 +30,7 @@ public class FacultyProfile {
     public ArrayList<CourseOffer> getCourseOffers() {
         ArrayList<CourseOffer> offers = new ArrayList<>();
         for (FacultyAssignment fa : facultyassignments) {
-            // add this assignment's course offer to the list
+            offers.add(fa.getCourseOffer());   // put this assignment's course offer into the result
         }
         return offers;
     }

@@ -6,7 +6,7 @@ package UserInterface.WorkAreas.StudentRole.ManageProfile;
 
 import Business.Business;
 import Business.Person.Person;
-import Business.Profiles.StudentProfile;
+import Business.Profiles.Profile;
 import javax.swing.JPanel;
 
 /**
@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class StudentManageProfileJPanel extends javax.swing.JPanel {
     
     Business business;
-    StudentProfile student;
+    Profile student;
     JPanel CardSequencePanel;
     
     private boolean editing = false;
@@ -24,7 +24,7 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
     /**
      * Creates new form StudentManageProfile
      */
-    public StudentManageProfileJPanel(Business business, StudentProfile student, JPanel CardSequencePanel) {
+    public StudentManageProfileJPanel(Business business, Profile student, JPanel CardSequencePanel) {
         this.business = business;
         this.student = student;
         this.CardSequencePanel = CardSequencePanel;
@@ -87,19 +87,19 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("NUID:");
         add(jLabel1);
-        jLabel1.setBounds(180, 60, 31, 16);
+        jLabel1.setBounds(180, 60, 40, 17);
 
         jLabel2.setText("Role:");
         add(jLabel2);
-        jLabel2.setBounds(180, 110, 40, 16);
+        jLabel2.setBounds(180, 110, 40, 17);
 
         jLabel4.setText("First Name:");
         add(jLabel4);
-        jLabel4.setBounds(150, 160, 70, 16);
+        jLabel4.setBounds(150, 160, 70, 17);
 
         jLabel5.setText("Last Name:");
         add(jLabel5);
-        jLabel5.setBounds(150, 210, 70, 16);
+        jLabel5.setBounds(150, 210, 70, 17);
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
             }
         });
         add(btnBack);
-        btnBack.setBounds(50, 360, 74, 23);
+        btnBack.setBounds(50, 360, 80, 23);
 
         btnEditSave.setText("Edit");
         btnEditSave.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +137,7 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Email:");
         add(jLabel6);
-        jLabel6.setBounds(180, 260, 70, 16);
+        jLabel6.setBounds(180, 260, 70, 17);
 
         txtEmail.setEditable(false);
         add(txtEmail);
