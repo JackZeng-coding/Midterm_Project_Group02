@@ -5,10 +5,16 @@
 package UserInterface.WorkAreas.StudentRole.Registration;
 
 import Business.Business;
+import Business.Person.Person;
 import javax.swing.JPanel;
 import Business.Profiles.StudentProfile;
+import info5100.university.example.CourseSchedule.CourseLoad;
+import info5100.university.example.CourseSchedule.CourseOffer;
+import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Department.Department;
+import info5100.university.example.CourseSchedule.SeatAssignment;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,8 +42,55 @@ public class StudentRegistrationJPanel extends javax.swing.JPanel {
     private void refreshAll() {
         Department dept = business.getDepartment();
         semester = (dept != null) ? dept.getCurrentSemester() : null;
-        txtHeader.setText("Register for classes" +)
+        txtHeader.setText("Register for classes" + (semester != null ? "-" + semester : ""));
+        loadOffer();
+        loadMyRegistration();
     }
+    public void loadOffer() {
+        DefaultTableModel model = (DefaultTableModel) tblOffers.getModel();
+        model.setRowCount(0);
+        rowOffers.clear();
+        
+        Department dept = business.getDepartment();
+        if (dept == null || semester == null) return;
+        CourseSchedule cs = dept.getCourseSchedule(semester);
+        if(cs == null) return;
+        
+        ArrayList<CourseOffer> offers = cs.getCourseOffers();
+        if(offers == null) return;
+        
+        for (CourseOffer co : offers) {
+            Object[] row = new Object[4];
+            row[0] = co.getCourseNumber();
+            row[1] = co.getSubjectCourse().getName();
+            row[2] = co.getCreditHours();
+            row[3] = co.getAvailableSeatCount() + " seats";
+            model.addRow(row);
+            rowOffers.add(co);
+        }
+    }
+    
+    private void loadMyRegistration() {
+        DefaultTableModel model = (DefaultTableModel) tblMine.getModel();
+        model.setRowCount(0);
+        rowMine.clear();
+        
+        info5100.university.example.Persona.StudentProfile record = student.getUniversityRecord();
+        if(record == null || semester == null) return;
+        CourseLoad cl = record.getCourseLoadBySemester(semester);
+        if (cl == null) return;
+        
+        for (SeatAssignment sa : cl.getSeatAssignments()) {
+            if (sa == null || sa.getAssociatedCourse() == null) continue;
+            Object[] row = new Object [3];
+            row[0] = sa.getAssociatedCourse().getCOurseNumber();
+            row[1] = sa.getAssociatedCourse().getName();
+            row[2] = sa.getAssociatedCourse().getCredits();
+            model.addRow(row);
+            rowMine.add(sa);
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,19 +101,179 @@ public class StudentRegistrationJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        txtHeader = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMine = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblOffers = new javax.swing.JTable();
+        btnRegister = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        btnDrop = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtStatus = new javax.swing.JLabel();
+
+        setLayout(null);
+
+        txtHeader.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtHeader.setText("Register for Classes -");
+        add(txtHeader);
+        txtHeader.setBounds(20, 10, 290, 30);
+
+        tblMine.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Number", "Name", "Credits"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblMine);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(60, 230, 990, 110);
+
+        tblOffers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Number", "Name", "Credits", "Seats"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblOffers);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(60, 70, 990, 110);
+
+        btnRegister.setText("Register >>");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        add(btnRegister);
+        btnRegister.setBounds(930, 190, 110, 23);
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack);
+        btnBack.setBounds(60, 440, 74, 23);
+
+        btnDrop.setText("<< Drop");
+        btnDrop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDropActionPerformed(evt);
+            }
+        });
+        add(btnDrop);
+        btnDrop.setBounds(935, 440, 110, 23);
+
+        jLabel1.setText("MY CURRENT REGISTRATIONS");
+        add(jLabel1);
+        jLabel1.setBounds(60, 210, 190, 16);
+
+        jLabel2.setText("AVAILABLE OFFERS");
+        add(jLabel2);
+        jLabel2.setBounds(60, 50, 170, 16);
+
+        txtStatus.setText("Select an offer to register.");
+        add(txtStatus);
+        txtStatus.setBounds(60, 380, 290, 16);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardSequencePanel.remove(this);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        int row = tblOffers.getSelectedRow();
+        if (row < 0 || row >= rowOffers.size()) {
+            txtStatus.setText("Select an offer to register.");
+            return;
+        }
+        Person p = student.getPerson();
+        if (p == null || semester == null) {
+            txtStatus.setText("Cannot register: missing student or semester.");
+            return;
+        }
+        CourseOffer co = rowOffers.get(row);
+        
+        info5100.university.example.Persona.StudentProfile record = student.getUniversityRecord();
+        if (record != null && record.getCourseLoadBySemester(semester) == null) {
+            record.newCourseLoad(semester);
+        }
+        boolean ok = business.getDepartment().RegisterForAClass(p.getPersonId(), co.getCourseNumber(), semester);
+        
+        txtStatus.setText(ok ? "Registered for " + co.getCourseNumber() + "." : "Could not register (full, already registered, or unavailable).");
+        loadOffer();
+        loadMyRegistration();
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
+        // TODO add your handling code here:
+        int row = tblMine.getSelectedRow();
+        if (row < 0 || row >= rowMine.size()) {
+            txtStatus.setText("Select a registration to drop.");
+            return;
+        }
+        Person p = student.getPerson();
+        if (p == null || semester == null) {
+            txtStatus.setText("Cannot drop: missing student or semester");
+            return;
+        }
+        SeatAssignment sa = rowMine.get(row);
+        String courseNumber = sa.getAssociatedCourse().getCOurseNumber();
+        
+        boolean ok = business.getDepartment().DropAClass(p.getPersonId(), courseNumber, semester);
+        
+        txtStatus.setText(ok ? "Dropped" + courseNumber + "." : "Could not drop " + courseNumber + ".");
+        loadOffer();
+        loadMyRegistration();
+  
+    }//GEN-LAST:event_btnDropActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDrop;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblMine;
+    private javax.swing.JTable tblOffers;
+    private javax.swing.JLabel txtHeader;
+    private javax.swing.JLabel txtStatus;
     // End of variables declaration//GEN-END:variables
 }
