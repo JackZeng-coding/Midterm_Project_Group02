@@ -9,6 +9,7 @@ import Business.Profiles.FacultyProfile;                         // access-contr
 import info5100.university.example.CourseSchedule.CourseOffer;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +21,8 @@ public class FacultyManageCoursesJPanel extends javax.swing.JPanel {
     Business business;
     FacultyProfile faculty;      // the logged-in teacher
     JPanel CardSequencePanel;
+    ArrayList<CourseOffer> offers;   // same order as the table rows
+    boolean editing = false;
 
     public FacultyManageCoursesJPanel(Business b, FacultyProfile fp, JPanel clp) {
         business = b;
@@ -27,14 +30,16 @@ public class FacultyManageCoursesJPanel extends javax.swing.JPanel {
         CardSequencePanel = clp;
         initComponents();
         populateTable();
+        setEditing(false);   // open in read-only mode
     }
 
     private void populateTable() {
+
         DefaultTableModel model = (DefaultTableModel) tblCourses.getModel();
         model.setRowCount(0);   // clear old rows before refilling
 
         // Only this teacher's OWN course offers: a faculty member can never see another teacher's course
-        ArrayList<CourseOffer> offers = faculty.getUniversityRecord().getCourseOffers();
+        offers = faculty.getUniversityRecord().getCourseOffers();
         for (CourseOffer co : offers) {
             Object[] row = new Object[5];
             row[0] = co.getSemester();   // semester
@@ -47,6 +52,33 @@ public class FacultyManageCoursesJPanel extends javax.swing.JPanel {
         if (offers.isEmpty()) {
             lblTitle.setText("My Courses (no courses assigned yet)");
         }
+    }
+
+    // The CourseOffer of the selected row, or null if nothing is selected
+    private CourseOffer getSelectedOffer() {
+        int row = tblCourses.getSelectedRow();
+        if (row < 0) {
+            return null;   // -1 means no row is selected
+        }
+        return offers.get(row);   // row i of the table = item i of the list
+    }
+
+    private void showSelectedDetails() {
+        CourseOffer co = getSelectedOffer();
+        if (co == null) {
+            txtMeetingTime.setText("");
+            txtDescription.setText("");
+            return;
+        }
+        txtMeetingTime.setText(co.getMeetingTime());
+        txtDescription.setText(co.getDescription());
+    }
+
+    private void setEditing(boolean on) {
+        editing = on;
+        txtMeetingTime.setEditable(on);
+        txtDescription.setEditable(on);
+        btnEditSave.setText(on ? "Save" : "Edit");
     }
 
     /**
@@ -62,6 +94,12 @@ public class FacultyManageCoursesJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCourses = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtMeetingTime = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescription = new javax.swing.JTextArea();
+        btnEditSave = new javax.swing.JButton();
 
         lblTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lblTitle.setText("My Courses");
@@ -82,10 +120,28 @@ public class FacultyManageCoursesJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblCourses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCoursesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCourses);
 
-        btnBack.setText("<<Back");
+        btnBack.setText("<< Back");
         btnBack.addActionListener(this::btnBackActionPerformed);
+
+        jLabel1.setText("Meeting Time:");
+
+        jLabel2.setText("Description:");
+
+        txtDescription.setColumns(20);
+        txtDescription.setLineWrap(true);
+        txtDescription.setRows(3);
+        txtDescription.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(txtDescription);
+
+        btnEditSave.setText("Edit");
+        btnEditSave.addActionListener(this::btnEditSaveActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,9 +155,21 @@ public class FacultyManageCoursesJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBack)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(470, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMeetingTime, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnBack)
+                                    .addGap(107, 107, 107)
+                                    .addComponent(btnEditSave))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
+                .addContainerGap(393, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,24 +177,97 @@ public class FacultyManageCoursesJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnBack)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMeetingTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(btnEditSave))
+                .addGap(63, 63, 63))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-                CardSequencePanel.remove(this);
+        CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnEditSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSaveActionPerformed
+        // TODO add your handling code here:
+        CourseOffer co = getSelectedOffer();
+        if (co == null) {
+            JOptionPane.showMessageDialog(this, "Please select a course first.",
+                    "No course selected", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!editing) {
+            // Business rule: only courses of the current semester can be changed
+            if (!Business.CURRENT_SEMESTER.equals(co.getSemester())) {
+                JOptionPane.showMessageDialog(this, co.getSemester() + " has ended. Only "
+                        + Business.CURRENT_SEMESTER + " courses can be edited.",
+                        "Read-only", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            setEditing(true);
+            return;
+        }
+        // ---- Save ----
+        String time = txtMeetingTime.getText().trim();
+        String desc = txtDescription.getText().trim();
+
+        if (time.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Meeting time is required.",
+                    "Missing information", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (time.length() > 40) {
+            JOptionPane.showMessageDialog(this, "Meeting time must be 40 characters or fewer.",
+                    "Too long", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (desc.length() > 300) {
+            JOptionPane.showMessageDialog(this, "Description must be 300 characters or fewer.",
+                    "Too long", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        co.setMeetingTime(time);
+        co.setDescription(desc);
+        JOptionPane.showMessageDialog(this, "Course details updated.",
+                "Saved", JOptionPane.INFORMATION_MESSAGE);
+        setEditing(false);
+    }//GEN-LAST:event_btnEditSaveActionPerformed
+
+    private void tblCoursesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCoursesMouseClicked
+        // TODO add your handling code here:
+        setEditing(false);       // switching to another course always leaves edit mode
+        showSelectedDetails();
+    }//GEN-LAST:event_tblCoursesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnEditSave;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblCourses;
+    private javax.swing.JTextArea txtDescription;
+    private javax.swing.JTextField txtMeetingTime;
     // End of variables declaration//GEN-END:variables
 }
