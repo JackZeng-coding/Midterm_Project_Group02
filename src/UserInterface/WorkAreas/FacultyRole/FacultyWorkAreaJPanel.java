@@ -168,10 +168,10 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
         // TODO add your handling code here:
-        // Placeholder until My Profile is built. The old code removed this work
-        // area and showed nothing, leaving a blank screen.
-        JOptionPane.showMessageDialog(this, "My Profile is coming soon.",
-                "Faculty", JOptionPane.INFORMATION_MESSAGE);
+        UserInterface.WorkAreas.StudentRole.ManageProfile.StudentManageProfileJPanel aos
+                = new UserInterface.WorkAreas.StudentRole.ManageProfile.StudentManageProfileJPanel(business, faculty, CardSequencePanel);
+        CardSequencePanel.add("My Profile", aos);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
