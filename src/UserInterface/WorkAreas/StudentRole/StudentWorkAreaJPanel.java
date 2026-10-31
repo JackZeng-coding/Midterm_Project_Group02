@@ -12,6 +12,7 @@ package UserInterface.WorkAreas.StudentRole;
 
 import Business.Business;
 import Business.Profiles.StudentProfile;
+import UserInterface.WorkAreas.StudentRole.Coursework.StudentCourseworkJPanel;
 import UserInterface.WorkAreas.StudentRole.GraduationAudit.StudentGraduationAuditJPanel;
 import UserInterface.WorkAreas.StudentRole.ManageProfile.StudentManageProfileJPanel;
 import UserInterface.WorkAreas.StudentRole.Registration.StudentRegistrationJPanel;
@@ -175,7 +176,9 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
-        
+        StudentCourseworkJPanel courseworkPanel = new StudentCourseworkJPanel(business, student, CardSequencePanel);
+        CardSequencePanel.add("Coursework", courseworkPanel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton4IdentifyResourceAssetsActionPerformed
 
