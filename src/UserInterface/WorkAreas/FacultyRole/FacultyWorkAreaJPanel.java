@@ -14,6 +14,7 @@ import Business.Business;
 import Business.Profiles.FacultyProfile;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import UserInterface.WorkAreas.FacultyRole.ManageCourses.FacultyManageCoursesJPanel;
 
 /**
  *
@@ -153,10 +154,9 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        // Placeholder until Manage Courses is built. It used to open the ADMIN
-        // ManagePersonsJPanel, which would let faculty reach admin features.
-        JOptionPane.showMessageDialog(this, "Manage Courses is coming soon.",
-                "Faculty", JOptionPane.INFORMATION_MESSAGE);
+        FacultyManageCoursesJPanel panel = new FacultyManageCoursesJPanel(business, faculty, CardSequencePanel);
+        CardSequencePanel.add("FacultyManageCourses", panel);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton4IdentifyResourceAssetsActionPerformed
 
