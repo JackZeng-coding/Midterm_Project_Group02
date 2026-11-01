@@ -25,7 +25,7 @@ public class CourseOffer {
     FacultyAssignment facultyassignment;
     String meetingTime = "TBA";   // course details the teacher can update
     String description = "";
-    ArrayList<CourseAssignment> assignments;
+    ArrayList<CourseAssignment> assignments; //added courseassignment arraylist to courseoffer
 
     public CourseOffer(Course c, String semester) {
         course = c;
@@ -84,7 +84,7 @@ public class CourseOffer {
     public String getCourseNumber() {
         return course.getCOurseNumber();
     }
-
+    // method to create assignments
     public CourseAssignment newAssignment(String title, String description, LocalDate dueDate, int maxPoints) {
         CourseAssignment a = new CourseAssignment(this, title, description, dueDate, maxPoints);
         assignments.add(a);
