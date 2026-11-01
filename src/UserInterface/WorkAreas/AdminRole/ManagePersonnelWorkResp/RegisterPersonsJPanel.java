@@ -86,7 +86,7 @@ public class RegisterPersonsJPanel extends javax.swing.JPanel {
         add(btnRegister);
         btnRegister.setBounds(200, 260, 80, 23);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("Register Person");
         add(jLabel2);
         jLabel2.setBounds(21, 20, 550, 28);

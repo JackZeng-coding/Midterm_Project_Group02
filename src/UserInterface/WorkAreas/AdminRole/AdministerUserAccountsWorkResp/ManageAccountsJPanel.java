@@ -78,7 +78,7 @@ public class ManageAccountsJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
         add(jLabel2);
         jLabel2.setBounds(30, 20, 550, 28);
