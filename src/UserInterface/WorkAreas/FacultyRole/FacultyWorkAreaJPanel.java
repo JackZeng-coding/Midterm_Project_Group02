@@ -75,7 +75,9 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         jButton10.setFont(getFont());
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("Manage Students Profiles");
+        jButton10.setToolTipText("Not in scope (2-person team: Admin + Student)");
         jButton10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton10.setEnabled(false);
         jButton10.setMaximumSize(new java.awt.Dimension(200, 40));
         jButton10.setMinimumSize(new java.awt.Dimension(20, 20));
         jButton10.setPreferredSize(new java.awt.Dimension(240, 25));
@@ -103,7 +105,9 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         jButton11.setFont(getFont());
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("Performance Reports");
+        jButton11.setToolTipText("Not in scope (2-person team: Admin + Student)");
         jButton11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton11.setEnabled(false);
         jButton11.setMaximumSize(new java.awt.Dimension(200, 40));
         jButton11.setMinimumSize(new java.awt.Dimension(20, 20));
         jButton11.setPreferredSize(new java.awt.Dimension(240, 25));
