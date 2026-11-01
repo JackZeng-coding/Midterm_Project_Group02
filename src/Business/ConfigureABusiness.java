@@ -17,11 +17,13 @@ import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
 import info5100.university.example.CourseCatalog.Course;
+import info5100.university.example.CourseSchedule.CourseAssignment;
 import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.CourseSchedule.SeatAssignment;
 import info5100.university.example.Department.Department;
+import java.time.LocalDate;
 
 /**
  *
@@ -128,6 +130,48 @@ class ConfigureABusiness {
 
 // ===== STUDENT SECTION (Gavin Wen): please add student demo data below =====
 //    -- Gavin, You can work here
+        // Coursework. Fall due dates are relative to today so the demo always has
+        // overdue and upcoming work, whichever day it is run
+        LocalDate today = LocalDate.now();
+
+        CourseAssignment layoutPage = info6150Fall.newAssignment("Responsive Layout Page",
+                "Build a single responsive page.", today.minusDays(14), 20);
+        info6150Fall.newAssignment("Accessibility",
+                "Test your page accessibility.", today.minusDays(2), 20);
+        info6150Fall.newAssignment("Portfolio Project",
+                "Publish a multi-page portfolio project and share the link.", today.plusDays(10), 40);
+
+        CourseAssignment erDiagram = damg6210Fall.newAssignment("ER Diagram",
+                "Model the university registration domain as an ER diagram.", today.minusDays(10), 20);
+        damg6210Fall.newAssignment("Worksheet",
+                "Complete worksheet.", today.plusDays(5), 30);
+
+        info6205Fall.newAssignment("Sorting Benchmark",
+                "Compare merge sort and quicksort on arrays of up to 1M items.", today.plusDays(3), 25);
+        info6205Fall.newAssignment("Graph Report",
+                "Implement algorithm and analyse its running time.", today.plusDays(12), 25);
+
+        CourseAssignment classDesign = info5100Spring.newAssignment("Class Design Exercise",
+                "Design the object model for a small business application.", LocalDate.of(2026, 2, 15), 50);
+        CourseAssignment swingApp = info5100Spring.newAssignment("Swing Application",
+                "Build a desktop application with Java Swing.", LocalDate.of(2026, 4, 12), 50);
+        CourseAssignment sqlLab = damg6210Spring.newAssignment("SQL Queries Lab",
+                "Write the join and aggregate queries listed in the handout.", LocalDate.of(2026, 3, 8), 40);
+
+        // Spring2026 is finished: every submission is on record and graded
+        seedGradedSubmission(adamSa1, classDesign, LocalDate.of(2026, 2, 14), 48f);
+        seedGradedSubmission(adamSa1, swingApp, LocalDate.of(2026, 4, 11), 47f);
+        seedGradedSubmission(adamSa2, sqlLab, LocalDate.of(2026, 3, 8), 33f);
+        seedGradedSubmission(jimSa1, classDesign, LocalDate.of(2026, 2, 15), 45f);
+        seedGradedSubmission(jimSa1, swingApp, LocalDate.of(2026, 4, 12), 44f);
+        seedGradedSubmission(annaSa1, classDesign, LocalDate.of(2026, 2, 13), 40f);
+        seedGradedSubmission(annaSa1, swingApp, LocalDate.of(2026, 4, 12), 41f);
+        seedGradedSubmission(annaSa2, sqlLab, LocalDate.of(2026, 3, 7), 39f);
+
+        // Fall2026 in progress: Adam has one graded and one overdue, Jim handed in late, Anna has not started
+        seedGradedSubmission(adamFall.getSeatAssignments().get(0), layoutPage, today.minusDays(15), 18f);
+        jimFall.getSeatAssignments().get(0).recordSubmission(erDiagram,
+                "ER diagram of students, courses and enrollments.", today.minusDays(9));
 // ===== END STUDENT SECTION =====
 
 // ===== FACULTY SECTION (Jiahao Zeng): faculty profiles and their login accounts =====     
@@ -149,6 +193,10 @@ class ConfigureABusiness {
 // ===== END FACULTY SECTION =====
         return business;
 
+    }
+
+    private static void seedGradedSubmission(SeatAssignment sa, CourseAssignment a, LocalDate submittedOn, float score) {
+        sa.recordSubmission(a, "Submission for " + a.getTitle() + ".", submittedOn).setScore(score);
     }
 
 }
