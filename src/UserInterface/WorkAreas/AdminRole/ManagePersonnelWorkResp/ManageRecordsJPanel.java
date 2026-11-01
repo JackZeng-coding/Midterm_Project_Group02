@@ -132,7 +132,7 @@ public class ManageRecordsJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         lblTitle.setText("Manage Records");
         add(lblTitle);
-        lblTitle.setBounds(20, 10, 250, 23);
+        lblTitle.setBounds(20, 10, 470, 40);
 
         tblRecords.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
