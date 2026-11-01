@@ -287,11 +287,11 @@ public class StudentCourseworkJPanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(txtSubmission);
 
         add(jScrollPane4);
-        jScrollPane4.setBounds(680, 260, 400, 140);
+        jScrollPane4.setBounds(680, 250, 400, 140);
 
-        lblSubmissionStatus.setText(" ");
+        lblSubmissionStatus.setText("Submission Status");
         add(lblSubmissionStatus);
-        lblSubmissionStatus.setBounds(680, 370, 400, 20);
+        lblSubmissionStatus.setBounds(560, 410, 400, 20);
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
