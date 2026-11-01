@@ -47,8 +47,13 @@ Because our team has two members (one member dropped the course), Prof. Bugrara 
 
 ## Features Implemented
 ### Student — Gavin Wen
-<!-- Gavin: TODO -->
-
+| Responsibility | What it does | PR |
+|---|---|---|
+| Manage Profile | View and edit your own name and email, with regex formating validation and unsaved-changes warnings | #9 |
+| View Transcript | Lists all courses with a credit-weighted GPA, details JPanel to view the course semester, instructor, and grade ("IP" for in-progress work) | #7 |
+| Graduation Audit | Checks the student's transcript against core/elective requirements and the 32-credit threshold, displaying a clear "Ready / Not Ready" to graduate | #10 |
+| Registration | View available sections for the current semester, enroll in open classes, and drop existing ones, with live seat count updates | #17 |
+| Course Work | JPanel for students to see their courses, selecting the course shows assigments for that course, track assignment statuses (Overdue, Submitted, Graded), and submit assignments | #19 |
 
 ### Admin — Jiahao Zeng
 | Responsibility | What it does | PR |
@@ -115,9 +120,23 @@ Authentication is covered by A-01 to A-03 and A-11; authorization by A-04, A-07,
 | A-11 | Click Logout | The work area is cleared and the login form unlocks |
  
 ### Student tests (Gavin Wen)
-<!-- Gavin TODO: please add testing Guide for Student Part -->
 | ID | Steps | Expected Result |
 |---|---|---|
+| S-01 | Log in as seeded student (adam) | The student workarea should open (not Admin or Faculty) |
+| S-02 | Open `Manage Profile` → click `Edit` → type "4dam" in First Name → `Save` | Rejected: "First name may contain letters, spaces, hyphens" |
+| S-03 | Edit Profile → type "Andy" → Save | Saved successfully; the name updates everywhere |
+| S-04 | Edit Profile → change anything → click `Back` without saving | Warning: "You have unsaved changes. Do you want to discard them?" |
+| S-05 | Open `Transcript` | JTable lists Adam's courses and shows his credit-weighted GPA |
+| S-06 | Select `INFO 5100` → click `Next >>` | Details panel opens showing Semester (Spring2026), Instructor (1001), and Grade (A 4.00) |
+| S-07 | Select a Fall2026 course (INFO 6150) in Transcript → `Next` | Grade shows "In progress" and is excluded from the GPA calculation |
+| S-08 | Open `Graduation Audit` | Core/Elective Jtables populate with ✓/✗ (if course counts toward degree), verdict reads "REQUIREMENTS NOT MET" (Adam is short on credits) |
+| S-09 | Open `Registration` | "Available Offers" Jtable lists Fall2026 classes with seat counts |
+| S-10 | Select an open Fall class → click `Register >>` | Status says "Registered...", the seat count should drop by 1; course appears in "My Current Registrations" |
+| S-11 | Select the class you just registered for → click `<< Drop` | Status says "Dropped..."; seat count goes back up; course disappears from your list |
+| S-12 | Open `Course Work` | "My Courses" lists Adam's courses, showing submitted counts and current score |
+| S-13 | Select `INFO 6150` → select an assignment → type anything → click `Submit` | Status changes to "Submitted" or "Submitted late" depending on due date |
+| S-14 | Try to submit an assignment for 'Spring2026' course (Completed) | Submission box locked with submission, status: "Course completed..., now locked." |
+| S-15 | Click `Back` from any Student panel | Returns to the "My Student Portal" menu |
 
 
 ## Challenges & Solutions
@@ -137,11 +156,10 @@ Authentication is covered by A-01 to A-03 and A-11; authorization by A-04, A-07,
 - Final cross-test on macOS and Windows, and recorded the demo video together.
 
 ### Gavin Wen
-<!-- Gavin TODO: please review and add details -->
 - **Coding:** Student use case: review transcript (#7), graduation audit (#10), register for classes (#17), manage coursework (#19); the shared profile panel (#9), later reused by Admin and Faculty.
 - **Documentation:** README skeleton (#1) and Student sections; slides for the Student use case and challenges.
 - **Testing:** test steps in each pull request; reviewed and approved Jack's pull requests.
-- **Pull requests:** 6 (#1, #7, #9, #10, #17, #19) · **Commits:** 33
+- **Pull requests:** 6 (#1, #7, #9, #10, #17, #19, #20) · **Commits:** 35
 
 ### Jiahao Zeng
 - **Coding:** Admin use case (#13–#16); login/logout and default-deny routing (#6); connecting the two layers and model fixes (#2–#4); demo data (#5); faculty model and teaching assignments (#8, #11); Faculty extras (#12, #16, #18).
