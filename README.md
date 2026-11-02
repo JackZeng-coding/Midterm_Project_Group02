@@ -71,7 +71,7 @@ Because our team has two members (one member dropped the course), Prof. Bugrara 
 | My Profile | The same shared profile panel | #16 |
 | Performance Reports / Manage Student Profiles | Disabled: outside the scope of a 2-person team | #18 |
 
-### Shared / Integration — Jiahao Zeng
+### Shared / Integration —  Jiahao Zeng (collaborate with Gavin Wen)
 | Work | PR |
 |---|---|
 | Login / logout and role-based routing | #6 |
@@ -159,13 +159,13 @@ Authentication is covered by A-01 to A-03 and A-11; authorization by A-04, A-07,
 - **Coding:** Student use case: review transcript (#7), graduation audit (#10), register for classes (#17), manage coursework (#19); the shared profile panel (#9), later reused by Admin and Faculty.
 - **Documentation:** README skeleton (#1) and Student sections; slides for the Student use case and challenges.
 - **Testing:** test steps in each pull request; reviewed and approved Jack's pull requests.
-- **Pull requests:** 6 (#1, #7, #9, #10, #17, #19, #20) · **Commits:** 35
+- **Pull requests:** 8 (#1, #7, #9, #10, #17, #19, #22, #23) · **Commits:** 36
 
 ### Jiahao Zeng
 - **Coding:** Admin use case (#13–#16); login/logout and default-deny routing (#6); connecting the two layers and model fixes (#2–#4); demo data (#5); faculty model and teaching assignments (#8, #11); Faculty extras (#12, #16, #18).
 - **Documentation:** README structure, Admin and shared sections; slides for the overview, architecture, access control and Admin use case.
 - **Testing:** test steps in each pull request; reviewed and tested Gavin's pull requests before merging.
-- **Pull requests:** 13 (#2–#6, #8, #11–#16, #18) · **Commits:** 51
+- **Pull requests:** 15 (#2-#6, #8, #11–#16, #18, #20, #21) · **Commits:** 53
 
 ## Team Rules
 - One branch per feature (e.g., 'name/feature').
@@ -177,8 +177,9 @@ Authentication is covered by A-01 to A-03 and A-11; authorization by A-04, A-07,
 I used Claude (Anthropic) to explain Java and NetBeans concepts, debug errors, suggest code for Manage Students features, Faculty panel and the delete Methods. The design decisions and the testing were done by our team.
 
 ## Links
-- Demo video (YouTube, unlisted): 
+- Presentation video (YouTube, unlisted): https://youtu.be/X6I6w--BdBs
 - Presentation slides (Canva): https://canva.link/s3omvghx1ybhgfn
+- Demo Video(Admin Use Case): https://youtu.be/GdgkeN3-Lgw
 
 
 
